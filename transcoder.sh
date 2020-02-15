@@ -10,25 +10,27 @@ do
 > $old
 > $new
 
-#create VOD list from
+# Create VOD list
 for i in `ls`
     do
     find "$(pwd)"/$i | grep .mp4 >> $old
 done
 
 sleep 10
-#Check if there are any new VOD
+# Check if there are any new VOD
 for i in `ls`
     do
     find "$(pwd)"/$i | grep .mp4 >> $new
 done
 
-# clear log file
+# Clear log file
 > transcoder.log
 
-# declare vod list
+# Declare vod list
 new_cnt=$(cat $new | wc -l)
 old_cnt=$(cat $old | wc -l)
+
+# Show the difference files
 result=$(diff $old $new | awk '{print $2}')
 
 
@@ -40,20 +42,20 @@ for i in $result
 do
     if [ "$new_cnt" -ne "$old_cnt" ]
          then
-# detect resolution an itrate from source
+# Detect resolution an itrate from source
             resolution=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 $i)
             bitrate=$(ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=noprint_wrappers=1:nokey=1 $i)
 
-# detect resolution widht and height
+# Detect resolution widht and height
             widht=$(echo "$resolution" | awk -F "x" '{ print $1}')
             height=$(echo "$resolution" | awk -F "x" '{ print $2}')
 
-# calculate adaptive resolution
+# Calculate adaptive resolution
             height1=$(($widht/3*2))
             height2=$(($widht/4*2))
             weght1=$(($height/3*2))
             weght2=$(($height/4*2))
-# calculate adaptive bitrate
+# Calculate adaptive bitrate
             originalbitrate=$(($bitrate/1024))
             hdbitrate=$(($bitrate/1024/2))
             sdbitrate=$(($bitrate/1024/3))
@@ -65,7 +67,7 @@ do
             hd_cnt=$(ls -la ./* | grep "720.mp4" | wc -l)
             sd_cnt=$(ls -la ./* | grep "480.mp4" | wc -l)
 
-# Output
+# Output log
 echo "================================================================"
 echo "Stat: = Total File: $new_cnt | transcoded fhd:$fhd_cnt hd:$hd_cnt sd:$sd_cnt"
 echo  "---------------------------------------------------------------"
@@ -118,25 +120,25 @@ echo "================================================================"         
 
 
 # Transcoding 
-                             ffmpeg -n -threads:v 2 -threads:a 8 -filter_threads 2 -thread_queue_size 512 -vsync 1 -hwaccel cuvid -c:v h264_cuvid -resize $resolution  -i $i \
-                            -c:v h264_nvenc -b:v "$originalbitrate"K -g 48 -keyint_min 48 -preset slow -profile:v high -c:a aac -ar 44100 -ac 2 $i-1080p.mp4
+                    ffmpeg -n -threads:v 2 -threads:a 8 -filter_threads 2 -thread_queue_size 512 -vsync 1 -hwaccel cuvid -c:v h264_cuvid -resize $resolution  -i $i \
+                    -c:v h264_nvenc -b:v "$originalbitrate"K -g 48 -keyint_min 48 -preset slow -profile:v high -c:a aac -ar 44100 -ac 2 $i-1080p.mp4
 
-                            ffmpeg -n -threads:v 2 -threads:a 8 -filter_threads 2 -thread_queue_size 512 -vsync 1 -hwaccel cuvid -c:v h264_cuvid -resize "$height1"x"$weght1" -i $i \
-                            -c:v h264_nvenc -b:v "$hdbitrate"K -g 48 -keyint_min 48 -preset medium -profile:v main -c:a aac -ar 44100 -ac 2 $i-720p.mp4
+                    ffmpeg -n -threads:v 2 -threads:a 8 -filter_threads 2 -thread_queue_size 512 -vsync 1 -hwaccel cuvid -c:v h264_cuvid -resize "$height1"x"$weght1" -i $i \
+                    -c:v h264_nvenc -b:v "$hdbitrate"K -g 48 -keyint_min 48 -preset medium -profile:v main -c:a aac -ar 44100 -ac 2 $i-720p.mp4
 
-                            ffmpeg -n -threads:v 2 -threads:a 8 -filter_threads 2 -thread_queue_size 512 -vsync 1 -hwaccel cuvid -c:v h264_cuvid -resize "$height2"x"$weght2" -i $i  \
-                            -c:v h264_nvenc -b:v "$sdbitrate"K -g 48 -keyint_min 48 -preset fast -profile:v baseline -c:a aac -ar 44100 -ac 2 $i-480p.mp4
+                    ffmpeg -n -threads:v 2 -threads:a 8 -filter_threads 2 -thread_queue_size 512 -vsync 1 -hwaccel cuvid -c:v h264_cuvid -resize "$height2"x"$weght2" -i $i  \
+                    -c:v h264_nvenc -b:v "$sdbitrate"K -g 48 -keyint_min 48 -preset fast -profile:v baseline -c:a aac -ar 44100 -ac 2 $i-480p.mp4
 
-# raname files
+# Raname files
                     for f in $i-1080p.mp4; do mv -v "$f" "${f/.mp4-1080p.mp4/_1080.mp4}"; done;
                     for f in $i-720p.mp4; do mv -v "$f" "${f/.mp4-720p.mp4/_720.mp4}"; done;
                     for f in $i-480p.mp4; do mv -v "$f" "${f/.mp4-480p.mp4/_480.mp4}"; done;
 
-# remove transcoded file from list
+# Remove transcoded file from list
                     sed -i '1d' new_pwd.lst
-        else
-                echo "file not found, sleep 10 sec"
+   else
+                    echo "file not found, sleep 10 sec"
 fi
-    	clear
-	done
+                   clear
+  done
 done
