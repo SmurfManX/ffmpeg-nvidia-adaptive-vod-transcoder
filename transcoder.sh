@@ -10,23 +10,18 @@ do
 > $old
 > $new
 
+#create VOD list from
 for i in `ls`
     do
     find "$(pwd)"/$i | grep .mp4 >> $old
 done
 
 sleep 10
-
+#Check if there are any new VOD
 for i in `ls`
     do
     find "$(pwd)"/$i | grep .mp4 >> $new
 done
-
-cd /mnt/storage1/sport_files/videos
-
-# list file variables
-old=/mnt/storage1/sport_files/videos/old_pwd.lst
-new=/mnt/storage1/sport_files/videos/new_pwd.lst
 
 # clear log file
 > transcoder.log
