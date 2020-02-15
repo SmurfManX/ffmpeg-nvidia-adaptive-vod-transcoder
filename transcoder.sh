@@ -61,7 +61,7 @@ do
             NOW=$(date +"%H:%M:%S %d-%m-%Y")
 
 # Find transcoded files
-		    fhd_cnt=$(ls -la ./* | grep "1080.mp4" | wc -l)
+            fhd_cnt=$(ls -la ./* | grep "1080.mp4" | wc -l)
             hd_cnt=$(ls -la ./* | grep "720.mp4" | wc -l)
             sd_cnt=$(ls -la ./* | grep "480.mp4" | wc -l)
 
@@ -80,12 +80,12 @@ echo "   Bitrate: "$originalbitrate"/Kbps"
 echo "   Profile: high"
 echo "   Preset: slow"
 echo "Stream 2"
-echo "   Resolution: "$height1"X"$weght1""
+echo "   Resolution: "$height1"x"$weght1""
 echo "   Bitrate: "$hdbitrate"/Kbps"  
 echo "   Profile: main"
 echo "   Preset: medium"  
 echo "Stream 3"
-echo "   Resolution: "$height2"X"$weght2""
+echo "   Resolution: "$height2"x"$weght2""
 echo "   Bitrate: "$sdbitrate"/Kbps"  
 echo "   Profile: baseline"
 echo "   Preset: fast"
@@ -97,7 +97,7 @@ echo  "---------------------------------------------------------------"         
 echo "Source info"                                                                    >> transcoder.log
 echo "File: = $i"                                                                     >> transcoder.log
 echo "Detected Resolution: $resolution"                                               >> transcoder.log
-echo "Detected Bitrate: "$originalbitrate"/Kbps"                                       >> transcoder.log
+echo "Detected Bitrate: "$originalbitrate"/Kbps"                                      >> transcoder.log
 echo  "---------------------------------------------------------------"               >> transcoder.log
 echo "Stream 1"                                                                       >> transcoder.log
 echo "   Resolution: $resolution"                                                     >> transcoder.log
@@ -105,12 +105,12 @@ echo "   Bitrate: "$originalbitrate"/Kbps"                                      
 echo "   Profile: high"                                                               >> transcoder.log
 echo "   Preset: slow"                                                                >> transcoder.log
 echo "Stream 2"                                                                       >> transcoder.log
-echo "   Resolution: "$height1"X"$weght1""                                            >> transcoder.log
+echo "   Resolution: "$height1"x"$weght1""                                            >> transcoder.log
 echo "   Bitrate: "$hdbitrate"/Kbps"                                                  >> transcoder.log
 echo "   Profile: main"                                                               >> transcoder.log
 echo "   Preset: medium"                                                              >> transcoder.log
 echo "Stream 3"                                                                       >> transcoder.log
-echo "   Resolution: "$height2"X"$weght2""                                            >> transcoder.log
+echo "   Resolution: "$height2"x"$weght2""                                            >> transcoder.log
 echo "   Bitrate: "$sdbitrate"/Kbps"                                                  >> transcoder.log
 echo "   Profile: baseline"                                                           >> transcoder.log
 echo "   Preset: fast"                                                                >> transcoder.log
