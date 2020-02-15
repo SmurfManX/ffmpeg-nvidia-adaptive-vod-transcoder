@@ -3,22 +3,22 @@ Stat: = Total File: 61981 | transcoded fhd:22 hd:22 sd:22
 ---------------------------------------------------------------
 Source info
 File: = /mnt/storage1/sport_files/videos/dir0/file1342.mp4
-Detected Resolution: 1280x720
-Detected Bitrate: 1888/Kbps
+Detected Resolution: 1920x1080
+Detected Bitrate: 5888/Kbps
 ---------------------------------------------------------------
 Stream 1
-   Resolution: 1280x720
-   Bitrate: 1888/Kbps
+   Resolution: 1920x1080
+   Bitrate: 5688/Kbps
    Profile: high
    Preset: slow
 Stream 2
-   Resolution: 852X480
-   Bitrate: 944/Kbps
+   Resolution: 1080x720
+   Bitrate: 2944/Kbps
    Profile: main
    Preset: medium
 Stream 3
-   Resolution: 640X360
-   Bitrate: 629/Kbps
+   Resolution: 854x480
+   Bitrate: 1229/Kbps
    Profile: baseline
    Preset: fast
 ================================================================
