@@ -7,6 +7,35 @@ new_cnt.lst
 old_cnt.lst
 transcoder.sh
 ```
+
+# Transcoder Log 
+```
+================================================================
+Stat: = Total File: 61981 | transcoded fhd:22 hd:22 sd:22
+---------------------------------------------------------------
+Source info
+File: = /mnt/storage1/sport_files/videos/dir0/file1342.mp4
+Detected Resolution: 1920x1080
+Detected Bitrate: 5888/Kbps
+---------------------------------------------------------------
+Stream 1
+   Resolution: 1920x1080
+   Bitrate: 5688/Kbps
+   Profile: high
+   Preset: slow
+Stream 2
+   Resolution: 1080x720
+   Bitrate: 2944/Kbps
+   Profile: main
+   Preset: medium
+Stream 3
+   Resolution: 854x480
+   Bitrate: 1229/Kbps
+   Profile: baseline
+   Preset: fast
+================================================================
+```
+
 # Console Log
 ```
 ================================================================
